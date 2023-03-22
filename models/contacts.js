@@ -18,8 +18,8 @@ const listContacts = async () => {
 
 const getContactById = async (contactId) => {
   try {
-    const data = await fs.readFile(contactsPath, "UTF8");
-    const contacts = JSON.parse(data);
+    
+    const contacts = await listContacts();
     const contact = contacts.find(({ id }) => id === contactId);
     return contact;
   } catch (error) {
@@ -29,8 +29,8 @@ const getContactById = async (contactId) => {
 
 const removeContact = async (contactId) => {
   try {
-    const data = await fs.readFile(contactsPath, "UTF8");
-    const contacts = JSON.parse(data);
+    const contacts = await listContacts();
+    console.log(contacts);
 
     const filteredContact = contacts.some(({ id }) => id === contactId);
     if (filteredContact) {
@@ -48,8 +48,7 @@ const removeContact = async (contactId) => {
 
 const addContact = async (name, email, phone) => {
   try {
-    const data = await fs.readFile(contactsPath, "UTF8");
-    const contacts = JSON.parse(data);
+   const contacts = await listContacts();
 
     const contact = {
       name,

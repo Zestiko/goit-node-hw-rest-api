@@ -1,9 +1,9 @@
 const { addContact } = require("../../models/contacts");
-const { date, validateJoi } = require("../../utils");
+const { date, validateJoi, catchAsync } = require("../../utils");
 
 
-const postContact = async (req, res, next) => {
-  try {
+const postContact = catchAsync(async (req, res, next) => {
+  
     const { name, email, phone } = req.body;
 
     if (!name || !email || !phone) {
@@ -23,9 +23,7 @@ const postContact = async (req, res, next) => {
          contact,
        });
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
+
+});
 
 module.exports = postContact;

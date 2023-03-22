@@ -1,9 +1,9 @@
 const { updateContact } = require("../../models/contacts");
 
-const { date, validateJoi } = require("../../utils");
+const { date, validateJoi, catchAsync } = require("../../utils");
 
-const putContact = async (req, res, next) => {
-  try {
+const putContact = catchAsync(async (req, res, next) => {
+  
     const { contactId } = req.params;
     const requesBodyLength = Object.keys(req.body).length;
 
@@ -29,9 +29,7 @@ const putContact = async (req, res, next) => {
       Date: date(),
       contact: result,
     });
-  } catch (error) {
-    console.log(error);
-  }
-};
+ 
+});
 
 module.exports = putContact;
