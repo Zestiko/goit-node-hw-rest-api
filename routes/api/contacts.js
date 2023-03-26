@@ -9,12 +9,13 @@ const {
   deleteContact,
   putContact,
 } = require("../../controllers/contacts");
+const validateContact = require("../../middleware/validateContact");
 
 router.get("/",getAll);
 
 router.get("/:contactId",getById);
 
-router.post("/", postContact);
+router.post("/",validateContact, postContact);
 
 router.delete("/:contactId", deleteContact);
 

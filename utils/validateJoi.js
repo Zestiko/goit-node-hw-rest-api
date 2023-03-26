@@ -8,7 +8,7 @@ const validateJoi = (requesBody) => {
       tlds: { allow: true },
     }),
     phone: Joi.string().min(6).max(12),
-  });
+  }).options({ abortEarly: false });
   const validateResul = schema.validate(requesBody);
   return validateResul;
 };
