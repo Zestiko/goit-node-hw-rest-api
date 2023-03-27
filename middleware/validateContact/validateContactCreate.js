@@ -1,6 +1,6 @@
-const { catchAsync, AppError, validateJoi } = require("../utils");
+const { catchAsync, AppError, validateJoi } = require("../../utils");
 
-const validateContact = catchAsync(async (req, res, next) => {
+const validateContactCreate = catchAsync(async (req, res, next) => {
   const { name, email, phone } = req.body;
 
   if (!name || !email || !phone) {
@@ -9,9 +9,12 @@ const validateContact = catchAsync(async (req, res, next) => {
   
   const { error, value } = validateJoi(req.body);
   
-  const errorMessage = error.details.map(({message})=> message).join(';   ')
+  
 
-    if (error) {
+  if (error) {
+      const errorMessage = error.details
+        .map(({ message }) => message)
+        .join(";   ");
       return next(new AppError(400, errorMessage));
     }
     req.body = value;
@@ -19,4 +22,4 @@ const validateContact = catchAsync(async (req, res, next) => {
 
 });
 
-module.exports = validateContact;
+module.exports = validateContactCreate;
