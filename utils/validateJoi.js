@@ -14,4 +14,15 @@ const validateJoi = (requesBody) => {
   return validateResul;
 };
 
-module.exports = validateJoi;
+
+ const validateJoiFavorite = (reqBody) => {
+  const schema = Joi.object({
+    favorite: Joi.boolean(),
+  }).options({ abortEarly: false });;
+  const validateResul = schema.validate(reqBody);
+  return validateResul;
+}
+module.exports = {
+  validateJoi,
+  validateJoiFavorite,
+};
