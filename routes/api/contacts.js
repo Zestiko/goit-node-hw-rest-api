@@ -8,16 +8,24 @@ const {
   postContact,
   deleteContact,
   putContact,
+  patchContact,
 } = require("../../controllers/contacts");
+const {
+  validateContactCreate,
+  validateContactUpdate,
+  validateContactFavorite,
+} = require("../../middleware/validateContact");
 
-router.get("/",getAll);
+router.get("/", getAll);
 
-router.get("/:contactId",getById);
+router.get("/:contactId", getById);
 
-router.post("/", postContact);
+router.post("/", validateContactCreate, postContact);
 
 router.delete("/:contactId", deleteContact);
 
-router.put("/:contactId", putContact);
+router.put("/:contactId", validateContactUpdate, putContact);
+
+router.patch("/:contactId/favorite", validateContactFavorite, patchContact);
 
 module.exports = router;

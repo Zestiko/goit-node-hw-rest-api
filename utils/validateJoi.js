@@ -8,9 +8,21 @@ const validateJoi = (requesBody) => {
       tlds: { allow: true },
     }),
     phone: Joi.string().min(6).max(12),
-  });
+    favorite: Joi.boolean(),
+  }).options({ abortEarly: false });
   const validateResul = schema.validate(requesBody);
   return validateResul;
 };
 
-module.exports = validateJoi;
+
+ const validateJoiFavorite = (reqBody) => {
+  const schema = Joi.object({
+    favorite: Joi.boolean(),
+  }).options({ abortEarly: false });;
+  const validateResul = schema.validate(reqBody);
+  return validateResul;
+}
+module.exports = {
+  validateJoi,
+  validateJoiFavorite,
+};
