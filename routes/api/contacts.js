@@ -15,6 +15,9 @@ const {
   validateContactUpdate,
   validateContactFavorite,
 } = require("../../middleware/validateContact");
+const { validateUserToken } = require("../../middleware/validateUsers");
+
+router.use(validateUserToken);
 
 router.get("/", getAll);
 

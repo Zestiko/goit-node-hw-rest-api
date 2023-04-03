@@ -1,9 +1,13 @@
- const Contact = require('./contactsModel/contatsModel')
+ const { AppError } = require('../utils');
+const Contact = require('./contactsModel/contatsModel')
 
 
-const listContacts = async () => {
+const listContacts = async (owner) => {
+  const findOptions = {
+    owner,
+  };
   try {
-    const contacts = await Contact.find();   
+    const contacts = await Contact.find(findOptions);   
     return contacts;
   } catch (error) {
     console.log(error);
@@ -30,12 +34,16 @@ const removeContact = async (contactId) => {
   }
 };
 
-const addContact = async (contactData) => {
+const addContact = async (contactData, owner) => {
+  const newContactData = {
+    owner,
+    ...contactData,
+  };
   try {
-    const newContact = await Contact.create(contactData);
+    const newContact = await Contact.create(newContactData);
     return newContact;
   } catch (error) {
-    console.log(error);
+   throw new AppError(400, error);
   }
 };
 

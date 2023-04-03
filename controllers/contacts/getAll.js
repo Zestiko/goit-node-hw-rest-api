@@ -2,7 +2,8 @@ const { date, catchAsync } = require("../../utils");
 const { listContacts } = require("../../models/contacts");
 
 const getAll = catchAsync(async (req, res, next) => {
-  const contacts = await listContacts();
+  const {id} = req.user
+  const contacts = await listContacts(id);
 
   res.status(200).json({
     Date: date(),
