@@ -41,8 +41,17 @@ const validateJoiUserRegister = (reqBody) => {
   const validateResul = schema.validate(reqBody);
   return validateResul;
 };
+
+const validateJoiUserSubscription = (reqBody) => {
+  const schema = Joi.object({
+    subscription: Joi.string().valid("starter", "pro", "business").required(),
+  }).options({ abortEarly: false });
+  const validateResul = schema.validate(reqBody);
+  return validateResul;
+};
 module.exports = {
   validateJoi,
   validateJoiFavorite,
   validateJoiUserRegister,
+  validateJoiUserSubscription,
 };

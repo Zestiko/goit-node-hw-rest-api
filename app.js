@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const contactsRouter = require('./routes/api/contacts')
-const usersRouter = require('./routes/api/userRoutes')
+const usersRouter = require('./routes/api/userRoutes');
+const { date } = require('./utils');
 
 const app = express()
 
@@ -33,7 +34,11 @@ app.use((req, res) => {
 })
 
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({ message: err.message });
+  res.status(err.status || 500).json({
+    Date: date(),
+    message: err.message,
+    stack: err.stack,
+  });
 })
 
 module.exports = app

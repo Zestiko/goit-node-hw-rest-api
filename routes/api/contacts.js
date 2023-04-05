@@ -14,6 +14,8 @@ const {
   validateContactCreate,
   validateContactUpdate,
   validateContactFavorite,
+  validateContactID,
+  validateContactOwner,
 } = require("../../middleware/validateContact");
 const { validateUserToken } = require("../../middleware/validateUsers");
 
@@ -21,14 +23,33 @@ router.use(validateUserToken);
 
 router.get("/", getAll);
 
-router.get("/:contactId", getById);
-
 router.post("/", validateContactCreate, postContact);
 
-router.delete("/:contactId", deleteContact);
+// router.use(validateContactOwner);
 
-router.put("/:contactId", validateContactUpdate, putContact);
+router.get("/:contactId", validateContactID, validateContactOwner, getById);
 
-router.patch("/:contactId/favorite", validateContactFavorite, patchContact);
+router.delete(
+  "/:contactId",
+  validateContactID,
+  validateContactOwner,
+  deleteContact
+);
+
+router.put(
+  "/:contactId",
+  validateContactID,
+  validateContactUpdate,
+  validateContactOwner,
+  putContact
+);
+
+router.patch(
+  "/:contactId/favorite",
+  validateContactID,
+  validateContactFavorite,
+  validateContactOwner,
+  patchContact
+);
 
 module.exports = router;

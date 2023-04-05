@@ -3,6 +3,7 @@ const {
   validateJoi,
   validateJoiFavorite,
   validateJoiUserRegister,
+  validateJoiUserSubscription,
 } = require("./validateJoi");
 const catchAsync = require('./cathAsync')
 const AppError = require('./appEror')
@@ -16,4 +17,5 @@ module.exports = {
   AppError,
   validateJoiFavorite,
   validateJoiUserRegister,
+  validateJoiUserSubscription,
 };
