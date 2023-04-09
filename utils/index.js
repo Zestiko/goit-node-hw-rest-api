@@ -1,7 +1,13 @@
 const date = require('./date')
-const { validateJoi, validateJoiFavorite } = require("./validateJoi");
+const {
+  validateJoi,
+  validateJoiFavorite,
+  validateJoiUserRegister,
+  validateJoiUserSubscription,
+} = require("./validateJoi");
 const catchAsync = require('./cathAsync')
 const AppError = require('./appEror')
+
 
 
 module.exports = {
@@ -10,4 +16,6 @@ module.exports = {
   catchAsync,
   AppError,
   validateJoiFavorite,
+  validateJoiUserRegister,
+  validateJoiUserSubscription,
 };

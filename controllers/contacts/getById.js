@@ -1,9 +1,10 @@
-const { getContactById } = require("../../models/contacts");
+
 const { date, catchAsync } = require("../../utils");
 
 const getById = catchAsync(async (req, res, next) => {
   const { contactId } = req.params;
-  const contact = await getContactById(contactId);
+
+  const contact = req.contact;
 
   if (!contact) {
     return res.status(404).json({
@@ -11,6 +12,7 @@ const getById = catchAsync(async (req, res, next) => {
       message: `Contact with ID: ${contactId} not found :( `,
     });
   }
+
   res.status(200).json({
     Date: date(),
     contact,
