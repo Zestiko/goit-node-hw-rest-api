@@ -10,7 +10,7 @@ describe("POST /api/users/login", () => {
 
     const res = await request(app).post("/api/users/login").send(testData);
 
-    expect(res.statusCode).toBe(201);
+    expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("token");
     expect(res.body.user).toHaveProperty("email");
     expect(typeof res.body.user.email).toBe("string");

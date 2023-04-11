@@ -30,7 +30,7 @@ const loginUser = catchAsync(async (req, res, next) => {
   
 
 
-  res.status(201).json({
+  res.status(200).json({
     Date: date(),
     token,
     user: {
