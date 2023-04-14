@@ -23,7 +23,6 @@ const validateJoiFavorite = (reqBody) => {
   return validateResul;
 };
 
-
 const validateJoiUserRegister = (reqBody) => {
   const schema = Joi.object({
     email: Joi.string()
@@ -32,11 +31,7 @@ const validateJoiUserRegister = (reqBody) => {
         tlds: { allow: true },
       })
       .required(),
-    password: Joi.string()
-      .min(2)
-      .max(30)
-      .required()
-      .regex(PASSWD_REGEX),
+    password: Joi.string().min(2).max(30).required().regex(PASSWD_REGEX),
   }).options({ abortEarly: false });
   const validateResul = schema.validate(reqBody);
   return validateResul;
@@ -49,9 +44,12 @@ const validateJoiUserSubscription = (reqBody) => {
   const validateResul = schema.validate(reqBody);
   return validateResul;
 };
+
+
 module.exports = {
   validateJoi,
   validateJoiFavorite,
   validateJoiUserRegister,
   validateJoiUserSubscription,
+
 };

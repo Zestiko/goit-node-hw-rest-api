@@ -5,12 +5,18 @@ const {
   logoutUser,
   currentUser,
   patchUserSubscription,
+  patchUserAvatar,
 } = require("../../controllers/users");
-const { validateUserRegister, validateUserlogin, validateUserToken, validateUserSubscription } = require("../../middleware/validateUsers");
+const {
+  validateUserRegister,
+  validateUserlogin,
+  validateUserToken,
+  validateUserSubscription,
+  uploadUserPhoto,
+} = require("../../middleware/validateUsers");
+
 
 const router = express.Router();
-
-
 
 router.post("/register", validateUserRegister, registerUser);
 
@@ -27,5 +33,6 @@ router.patch(
   patchUserSubscription
 );
 
+router.patch("/avatars", validateUserToken, uploadUserPhoto, patchUserAvatar);
 
 module.exports = router;
