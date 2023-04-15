@@ -1,5 +1,5 @@
 const { date, catchAsync } = require("../../utils");
-const { listContacts } = require("../../models/contacts");
+const { listContacts } = require("../../services");
 
 const getAll = catchAsync(async (req, res, next) => {
   const { id } = req.user;

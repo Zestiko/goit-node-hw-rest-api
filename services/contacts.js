@@ -1,5 +1,5 @@
 const { AppError } = require("../utils");
-const Contact = require("./contactsModel/contatsModel");
+const Contact = require("../models/contactsModel/contatsModel");
 
 const listContacts = async ({ id: owner, skip, paginationLimit, favorite }) => {
   const findOptions = {

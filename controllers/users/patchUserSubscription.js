@@ -1,4 +1,4 @@
-const { updateSubscription, getUserById } = require("../../models/user");
+const { updateSubscription, getUserById } = require("../../services");
 const { catchAsync, date } = require("../../utils");
 
 const patchUserSubscription = catchAsync(async (req, res, next) => {

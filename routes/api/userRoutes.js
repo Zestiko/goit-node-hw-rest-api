@@ -6,15 +6,18 @@ const {
   currentUser,
   patchUserSubscription,
   patchUserAvatar,
+  verifyEmail,
+  resendVerifyEmail,
 } = require("../../controllers/users");
+
 const {
   validateUserRegister,
   validateUserlogin,
   validateUserToken,
   validateUserSubscription,
   uploadUserPhoto,
+  validateUserEmail,
 } = require("../../middleware/validateUsers");
-
 
 const router = express.Router();
 
@@ -34,5 +37,9 @@ router.patch(
 );
 
 router.patch("/avatars", validateUserToken, uploadUserPhoto, patchUserAvatar);
+
+router.get("/verify/:verificationToken", verifyEmail);
+
+router.post("/verify", validateUserEmail, resendVerifyEmail);
 
 module.exports = router;

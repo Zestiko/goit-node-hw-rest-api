@@ -1,4 +1,4 @@
-const { updateContact } = require("../../models/contacts");
+const { updateContact } = require("../../services");
 const { catchAsync } = require("../../utils");
 
 const patchContact = catchAsync(async (req, res, next) => {

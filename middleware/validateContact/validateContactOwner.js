@@ -1,4 +1,4 @@
-const { getContactById } = require("../../models/contacts");
+const { getContactById } = require("../../services");
 const { AppError, catchAsync,  } = require("../../utils");
 
 const validateContactOwner = catchAsync(async (req, res, next) => {

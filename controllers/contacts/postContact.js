@@ -1,4 +1,4 @@
-const { addContact } = require("../../models/contacts");
+const { addContact } = require("../../services");
 const { date,  catchAsync } = require("../../utils");
 
 const postContact = catchAsync(async (req, res, next) => {

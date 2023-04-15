@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
+
 const usersShema = new mongoose.Schema({
   password: {
     type: String,
@@ -18,7 +19,17 @@ const usersShema = new mongoose.Schema({
   },
   token: String,
   avatarURL: String,
-});
+  
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, 'Verify token is required'],
+  },
+}
+);
 
 usersShema.pre("save", async function(next) {
   if (this.isNew) {
@@ -28,6 +39,8 @@ usersShema.pre("save", async function(next) {
       true
     );
     this.avatarURL = avatar;
+  //   const verificationToken = uuid()
+  //   this.verificationToken = verificationToken;
   }
 
   if (!this.isModified("password")) return next();
@@ -41,6 +54,13 @@ usersShema.pre("save", async function(next) {
 
 usersShema.methods.checkPassword = (candidate, hash) =>
   bcrypt.compare(candidate, hash);
+
+// usersShema.methods.generateVerificationToken = function() {
+//   const token = uuid();
+//   this.verificationToken = token;
+//   console.log(this.verificationToken);
+//   return token;
+// }
 const User = mongoose.model("users", usersShema);
 
 module.exports = User;
