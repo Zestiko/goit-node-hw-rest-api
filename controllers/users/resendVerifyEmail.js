@@ -12,7 +12,7 @@ const resendVerifyEmail = catchAsync(async (req, res, next) => {
     throw new AppError(400, "Verification has already been passed");
   }
 
-  if (user?.verify === true) {
+  if (user?.verify === false) {
     const email = {
       to: req.body.email,
       subject: "Verefy your email",
