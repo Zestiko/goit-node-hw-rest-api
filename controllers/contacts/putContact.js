@@ -1,4 +1,4 @@
-const { updateContact } = require("../../models/contacts");
+const { updateContact } = require("../../services");
 
 const { date,  catchAsync } = require("../../utils");
 

@@ -3,6 +3,7 @@ const validateUserlogin = require('./validateUserlogin')
 const validateUserToken = require('./validateUserToken')
 const validateUserSubscription =require('./validateUserSubscription')
 const uploadUserPhoto = require('./uploadUserPhoto')
+const validateUserEmail = require("./validateUserEmail");
 
 module.exports = {
   validateUserRegister,
@@ -10,4 +11,5 @@ module.exports = {
   validateUserToken,
   validateUserSubscription,
   uploadUserPhoto,
+  validateUserEmail,
 };

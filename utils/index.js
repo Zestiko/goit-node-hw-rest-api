@@ -4,9 +4,12 @@ const {
   validateJoiFavorite,
   validateJoiUserRegister,
   validateJoiUserSubscription,
+  validateJoiUserEmail,
 } = require("./validateJoi");
 const catchAsync = require('./cathAsync')
 const AppError = require('./appEror')
+const generateVerefyToken = require("./generateVerefyToken");
+const sendMail = require("./sendMail");
 
 
 
@@ -18,4 +21,7 @@ module.exports = {
   validateJoiFavorite,
   validateJoiUserRegister,
   validateJoiUserSubscription,
+  validateJoiUserEmail,
+  generateVerefyToken,
+  sendMail,
 };

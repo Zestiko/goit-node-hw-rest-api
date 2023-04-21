@@ -45,11 +45,24 @@ const validateJoiUserSubscription = (reqBody) => {
   return validateResul;
 };
 
+const validateJoiUserEmail = (reqBody) => {
+  const schema = Joi.object({
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: true },
+      })
+      .required(),
+  }).options({ abortEarly: false });
+  const validateResul = schema.validate(reqBody);
+  return validateResul;
+};
+
 
 module.exports = {
   validateJoi,
   validateJoiFavorite,
   validateJoiUserRegister,
   validateJoiUserSubscription,
-
+  validateJoiUserEmail,
 };

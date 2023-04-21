@@ -1,4 +1,4 @@
-const { getUserById } = require("../../models/user");
+const { getUserById } = require("../../services");
 const {
   catchAsync,
   AppError,

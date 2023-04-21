@@ -1,5 +1,5 @@
 const { date, catchAsync, AppError } = require("../../utils");
-const { login, saveTokenToUser } = require("../../models/user");
+const { login, saveTokenToUser } = require("../../services/user");
 
 const jwt = require("jsonwebtoken");
 
@@ -22,20 +22,22 @@ const loginUser = catchAsync(async (req, res, next) => {
     return next(new AppError(401, "Email or password is wrong"));
   }
 
+  if (!user.verify) {
+    return next(new AppError(401, "Please verify your Email"));
+  }
+
   user.password = undefined;
   console.log(user.id);
 
   const token = signToken(user.id);
   await saveTokenToUser(user.id, token);
-  
-
 
   res.status(200).json({
     Date: date(),
     token,
     user: {
       email: user.email,
-      subscription: user.subscription
+      subscription: user.subscription,
     },
   });
 });

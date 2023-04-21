@@ -1,5 +1,5 @@
 const {  catchAsync } = require("../../utils");
-const { unsetUserToken } = require("../../models/user");
+const { unsetUserToken } = require("../../services");
 
 const logoutUser = catchAsync(async (req, res, next) => {
   const { id } = req.user;

@@ -1,13 +1,13 @@
 const { AppError } = require("../utils");
-const User = require("./userModel/userModel");
+const User = require("../models/userModel/userModel");
 
-const register = async (userData) => {
+const register = async (userData, verificationToken) => {
   try {
-    const { email, subscription } = await User.create(userData);
-    
-    return { email, subscription };
+    const user = await User.create({ ...userData, verificationToken });
+
+    return user;
   } catch (error) {
-   
+    console.log(error);
     throw new AppError(409, "Email in use");
   }
 };
@@ -65,6 +65,38 @@ const updateSubscription = async (id, subscription) => {
   }
 };
 
+const verifyUser = async ( verificationToken ) => {
+  console.log(verificationToken);
+
+  try {
+    const user = await User.findOne({ verificationToken });
+    return user;
+  } catch (error) {
+    throw new AppError(500, error);
+  }
+};
+
+const updateUser = async (id, params) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(id, { ...params });
+
+    return updatedUser;
+  } catch (error) {
+    throw new AppError(500, error);
+  }
+};
+
+const findUserByEmail = async (email) => {
+ 
+
+  try {
+    const user = await User.findOne({ email });
+    return user;
+  } catch (error) {
+    throw new AppError(500, error);
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -72,4 +104,7 @@ module.exports = {
   getUserById,
   unsetUserToken,
   updateSubscription,
+  verifyUser,
+  updateUser,
+  findUserByEmail,
 };
